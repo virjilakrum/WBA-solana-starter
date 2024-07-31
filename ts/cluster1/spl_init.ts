@@ -19,6 +19,7 @@ const connection = new Connection("https://api.devnet.solana.com", commitment);
       null,
       6,
     );
+    console.log(`Mint: ${mint.toBase58()}`);
     // const mint = ???
   } catch (error) {
     console.log(`Oops, something went wrong: ${error}`);
