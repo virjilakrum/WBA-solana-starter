@@ -32,6 +32,18 @@ const mint = new PublicKey("HWkiywmVgVmVzg3JtHivLrTrQrrKjMaP7mR8QKk84F7b");
       keypair.publicKey,
     );
     console.log(`Ur ATA is: ${ata.address.toBase58()}`);
+
+    const mintTx = await mintTo(
+      connection,
+      keypair,
+      mint,
+      ata.address,
+      keypair,
+      100n * token_decimals,
+    );
+    console.log(
+      `Ur mint tx id: https://explorer.solana.com/tx/${mintTx}?cluster=devnet`,
+    );
   } catch (error) {
     console.log(`404, something went wrong: ${error}`);
   }
