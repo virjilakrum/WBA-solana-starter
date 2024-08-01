@@ -1,48 +1,65 @@
-import wallet from "../wba-wallet.json"
-import { createUmi } from "@metaplex-foundation/umi-bundle-defaults"
-import { 
-    createMetadataAccountV3, 
-    CreateMetadataAccountV3InstructionAccounts, 
-    CreateMetadataAccountV3InstructionArgs,
-    DataV2Args
+import wallet from "../../wba-wallet.json";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
+import {
+  createMetadataAccountV3,
+  CreateMetadataAccountV3InstructionAccounts,
+  CreateMetadataAccountV3InstructionArgs,
+  DataV2Args,
 } from "@metaplex-foundation/mpl-token-metadata";
-import { createSignerFromKeypair, signerIdentity, publicKey } from "@metaplex-foundation/umi";
+import {
+  createSignerFromKeypair,
+  signerIdentity,
+  publicKey,
+} from "@metaplex-foundation/umi";
+import { findMetadataPda } from "@metaplex-foundation/mpl-token-metadata";
+import base58 from "bs58";
 
 // Define our Mint address
-const mint = publicKey("<mint address>")
+const mint = publicKey("HWkiywmVgVmVzg3JtHivLrTrQrrKjMaP7mR8QKk84F7b");
 
 // Create a UMI connection
-const umi = createUmi('https://api.devnet.solana.com');
+const umi = createUmi("https://api.devnet.solana.com");
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
 umi.use(signerIdentity(createSignerFromKeypair(umi, keypair)));
 
 (async () => {
-    try {
-        // Start here
-        // let accounts: CreateMetadataAccountV3InstructionAccounts = {
-        //     ???
-        // }
+  try {
+    const metadataPda = findMetadataPda(umi, { mint });
 
-        // let data: DataV2Args = {
-        //     ???
-        // }
+    const accounts: CreateMetadataAccountV3InstructionAccounts = {
+      metadata: metadataPda,
+      mint: mint,
+      mintAuthority: signer,
+      payer: signer,
+      updateAuthority: signer.publicKey,
+    };
 
-        // let args: CreateMetadataAccountV3InstructionArgs = {
-        //     ???
-        // }
+    const data: DataV2Args = {
+      name: "zklxrugs",
+      symbol: "ZKLX",
+      uri: "",
+      sellerFeeBasisPoints: 500,
+      creators: null,
+      uses: null,
+      collection: null,
+    };
 
-        // let tx = createMetadataAccountV3(
-        //     umi,
-        //     {
-        //         ...accounts,
-        //         ...args
-        //     }
-        // )
+    const args: CreateMetadataAccountV3InstructionArgs = {
+      data: data,
+      isMutable: true,
+      collectionDetails: null,
+    };
 
-        // let result = await tx.sendAndConfirm(umi);
-        // console.log(bs58.encode(result.signature));
-    } catch(e) {
-        console.error(`Oops, something went wrong: ${e}`)
-    }
+    let tx = createMetadataAccountV3(umi, {
+      ...accounts,
+      ...args,
+    });
+
+    let result = await tx.sendAndConfirm(umi);
+
+    console.log(base58.encode(result.signature));
+  } catch (e) {
+    console.error(`Oops, something went wrong: ${e}`);
+  }
 })();

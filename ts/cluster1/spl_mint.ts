@@ -1,6 +1,6 @@
 import { Keypair, PublicKey, Connection, Commitment } from "@solana/web3.js";
-import { getOrCreateAssociatedTokenAccount, mintTo } from "@solana/spl-token";
-import wallet from "./wallet/wba-wallet.json";
+import { getOrCreateAssociatedTokenAccount, mintTo } from '@solana/spl-token';
+import wallet from "../../wba-wallet.json"
 
 // Import our keypair from the wallet file
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
@@ -12,39 +12,31 @@ const connection = new Connection("https://api.devnet.solana.com", commitment);
 const token_decimals = 1_000_000n;
 
 // Mint address
-const mint = new PublicKey("HWkiywmVgVmVzg3JtHivLrTrQrrKjMaP7mR8QKk84F7b");
+const mint = new PublicKey("GNGEwqYFimVjndDMtL8vKne2ygyEAoqHHG2w125BGzVY");
 
 (async () => {
-  try {
-    // Create an ATA
-    // const ata = ???
-    // console.log(`Your ata is: ${ata.address.toBase58()}`);
-    // Mint to ATA
-    // const mintTx = ???
-    // console.log(`Your mint txid: ${mintTx}`);
-    //
-    //
+    try {
+      const ata = await getOrCreateAssociatedTokenAccount(
+        connection,
+        keypair,
+        mint,
+        keypair.publicKey
+      );
 
-    const ata = await getOrCreateAssociatedTokenAccount(
-      connection,
-      keypair,
-      mint,
-      keypair.publicKey,
-    );
-    console.log(`Ur ATA is: ${ata.address.toBase58()}`);
+      console.log(`Your ata is: ${ata.address.toBase58()}`);
 
-    const mintTx = await mintTo(
-      connection,
-      keypair,
-      mint,
-      ata.address,
-      keypair,
-      100n * token_decimals,
-    );
-    console.log(
-      `Ur mint tx id: https://explorer.solana.com/tx/${mintTx}?cluster=devnet`,
-    );
-  } catch (error) {
-    console.log(`404, something went wrong: ${error}`);
-  }
-})();
+      const mintTx = await mintTo(
+        connection,
+        keypair,
+        mint,
+        ata.address,
+        keypair,
+        1_000n * token_decimals,
+      );
+
+      console.log(`Success! Your mint transaction is: ${mintTx}`);
+
+    } catch(error) {
+        console.log(`Oops, something went wrong: ${error}`)
+    }
+})()

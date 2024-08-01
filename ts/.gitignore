@@ -1,5 +1,3 @@
 *wallet.json
 node_modules
 yarn.lock
-target
-ts/.yarn/install-state.gz
