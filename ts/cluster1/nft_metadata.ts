@@ -21,7 +21,8 @@ umi.use(signerIdentity(signer));
     // Follow this JSON structure
     // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
 
-    const image = "https://arweave.net/...";
+    const image =
+      "https://arweave.net/TsLIKFdwGaxWyUrt1sIZK2VWLphzCrdVFxaPabrs7Qs";
     const metadata = {
       name: "zklxrugs",
       symbol: "ZKLX",

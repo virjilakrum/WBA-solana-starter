@@ -10,7 +10,7 @@ import {
   mplTokenMetadata,
 } from "@metaplex-foundation/mpl-token-metadata";
 
-import wallet from "../../wba-wallet.json";
+import wallet from "./wallet/wba-wallet.json";
 import base58 from "bs58";
 
 const RPC_ENDPOINT = "https://api.devnet.solana.com";
@@ -28,7 +28,7 @@ const mint = generateSigner(umi);
     mint,
     name: "zklxrugs",
     symbol: "ZKLX",
-    uri: "https://arweave.net/...",
+    uri: "https://arweave.net/TsLIKFdwGaxWyUrt1sIZK2VWLphzCrdVFxaPabrs7Qs",
     sellerFeeBasisPoints: percentAmount(7),
   });
 
