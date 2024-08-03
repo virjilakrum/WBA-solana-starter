@@ -1,4 +1,4 @@
-import wallet from "../../wba-wallet.json";
+import wallet from "./wallet/wba-wallet.json";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
   createGenericFile,
