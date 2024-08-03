@@ -1,4 +1,4 @@
-import wallet from "../../wba-wallet.json";
+import wallet from "./wallet/wba-wallet.json";
 import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
   createGenericFile,
@@ -19,9 +19,7 @@ umi.use(signerIdentity(signer));
 
 (async () => {
   try {
-    const image = await readFile(
-      "/Users/dante/Desktop/reacthreejs/WBA-solana-starter/ts/cluster1/assets/generug.png",
-    );
+    const image = await readFile("./cluster1/assets/image.jpeg");
     const generic = await createGenericFile(image, "rug", {
       contentType: "image/png",
     });
