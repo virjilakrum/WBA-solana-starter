@@ -28,7 +28,7 @@ const mint = generateSigner(umi);
     mint,
     name: "zklxrugs",
     symbol: "ZKLX",
-    uri: "https://arweave.net/TsLIKFdwGaxWyUrt1sIZK2VWLphzCrdVFxaPabrs7Qs",
+    uri: "https://arweave.net/Oztklc8VMGi4PDXmqBj-NKj1ktgm3pxr-BlZf8ZYvb4",
     sellerFeeBasisPoints: percentAmount(7),
   });
 

@@ -22,7 +22,7 @@ umi.use(signerIdentity(signer));
     // https://docs.metaplex.com/programs/token-metadata/changelog/v1.0#json-structure
 
     const image =
-      "https://arweave.net/TsLIKFdwGaxWyUrt1sIZK2VWLphzCrdVFxaPabrs7Qs";
+      "https://arweave.net/Oztklc8VMGi4PDXmqBj-NKj1ktgm3pxr-BlZf8ZYvb4";
     const metadata = {
       name: "zklxrugs",
       symbol: "ZKLX",
