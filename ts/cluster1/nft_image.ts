@@ -19,7 +19,7 @@ umi.use(signerIdentity(signer));
 
 (async () => {
   try {
-    const image = await readFile("./cluster1/assets/image.jpeg");
+    const image = await readFile("./cluster1/assets/image.jpeg"); // change with nonlocal dir.
     const generic = await createGenericFile(image, "rug", {
       contentType: "image/png",
     });
